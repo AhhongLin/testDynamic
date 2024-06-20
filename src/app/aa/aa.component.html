@@ -1,0 +1,16 @@
+<div appDir1>這邊喔</div>
+<button (click)="toggleTemplate()">Toggle Template</button>
+<button (click)="toggleShow()">Toggle Show</button>
+<button (click)="createTemplate()">create Template</button>
+<button (click)="destroyTemplate()">destroy Template</button>
+{{ isTemplateVisible ? "Template is visible" : "Template is not visible" }}
+<div *ngIf="isTemplateVisible" >
+</div>
+<div #container>hello</div>
+<p>what ever</p>
+<ng-template #dynamicTemplate>
+  <p>This is a dynamically rendered template content.</p>
+</ng-template>
+
+
+<div *appMyNgIf="isShow">myNgIf</div>
