@@ -30,7 +30,7 @@ export class AaComponent implements AfterViewInit, OnInit {
   embeddedViewRef?: EmbeddedViewRef<any>;
 
   @ViewChild(Dir1Directive) dir1!: Dir1Directive;
-  isShow: boolean | undefined;
+  isShow = true;
 
   toggleShow() {
     this.isShow = !this.isShow;
