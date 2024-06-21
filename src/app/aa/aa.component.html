@@ -11,6 +11,12 @@
 <ng-template #dynamicTemplate>
   <p>This is a dynamically rendered template content.</p>
 </ng-template>
+<ng-template #dynamicTemplateElse>
+  <p>Else.Else.Else.Else.</p>
+</ng-template>
 
 
-<div *appMyNgIf="isShow">myNgIf</div>
+<!--<div *appMyNgIf="isShow">myNgIf</div>-->
+
+<div *appMyNgIf="isShow then dynamicTemplate else dynamicTemplateElse">myNgIf</div>
+<div *ngIf="isShow then dynamicTemplate else dynamicTemplateElse">myNgIf</div>
