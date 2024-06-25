@@ -20,3 +20,7 @@
 
 <div *appMyNgIf="isShow then dynamicTemplate else dynamicTemplateElse">myNgIf</div>
 <div *ngIf="isShow then dynamicTemplate else dynamicTemplateElse">myNgIf</div>
+
+<button (click)="setName()">setName</button>{{ form.controls.name.getRawValue() }}
+<input type="text" [formControl]="form.controls.name">
+<app-my-input [formControl]="form.controls.name"></app-my-input>

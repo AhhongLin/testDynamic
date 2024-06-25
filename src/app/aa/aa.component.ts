@@ -5,11 +5,14 @@ import {
   OnInit,
   TemplateRef,
   ViewChild,
-  ViewContainerRef
+  ViewContainerRef,
+  inject
 } from '@angular/core';
 import {NgIf} from "@angular/common";
 import {Dir1Directive} from "../dir1.directive";
 import {MyNgIfDirective} from "../my-ng-if.directive";
+import {MyInputComponent} from "../my-input/my-input.component";
+import {FormBuilder, FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-aa',
@@ -17,7 +20,10 @@ import {MyNgIfDirective} from "../my-ng-if.directive";
   imports: [
     NgIf,
     Dir1Directive,
-    MyNgIfDirective
+    MyNgIfDirective,
+    MyInputComponent,
+    ReactiveFormsModule,
+    FormsModule
   ],
   templateUrl: './aa.component.html',
   styleUrl: './aa.component.css'
@@ -31,6 +37,11 @@ export class AaComponent implements AfterViewInit, OnInit {
 
   @ViewChild(Dir1Directive) dir1!: Dir1Directive;
   isShow = true;
+
+  fb = inject(FormBuilder);
+  form = this.fb.group({
+    name: this.fb.control('')
+  });
 
   toggleShow() {
     this.isShow = !this.isShow;
@@ -68,4 +79,7 @@ export class AaComponent implements AfterViewInit, OnInit {
     }
   }
 
+  setName() {
+    this.form.controls.name.setValue('test666');
+  }
 }
