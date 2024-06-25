@@ -2,11 +2,11 @@ import {
   AfterViewInit,
   Component,
   EmbeddedViewRef,
+  inject,
   OnInit,
   TemplateRef,
   ViewChild,
-  ViewContainerRef,
-  inject
+  ViewContainerRef
 } from '@angular/core';
 import {NgIf} from "@angular/common";
 import {Dir1Directive} from "../dir1.directive";
@@ -43,6 +43,7 @@ export class AaComponent implements AfterViewInit, OnInit {
     name: this.fb.control('')
   });
 
+
   toggleShow() {
     this.isShow = !this.isShow;
   }
@@ -65,6 +66,7 @@ export class AaComponent implements AfterViewInit, OnInit {
     } else {
       console.log('container is not available in ngOnInit');
     }
+
   }
 
   createTemplate() {

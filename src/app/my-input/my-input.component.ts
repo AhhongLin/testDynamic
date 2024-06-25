@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+import {Component, inject, Injector, OnInit, runInInjectionContext} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl} from "@angular/forms";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-my-input',
@@ -15,11 +16,20 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
     }
   ]
 })
-export class MyInputComponent implements ControlValueAccessor {
+export class MyInputComponent implements OnInit, ControlValueAccessor {
   value: string = '';
+
   disabled: boolean = false;
   onChange: any;
   onTouched: any;
+
+  injector = inject(Injector);
+  ngControl!: NgControl;
+
+  ngOnInit(): void {
+    this.ngControl = this.injector.get(NgControl);
+    console.log('ngControl', this.ngControl);
+  }
 
   writeValue(obj: string): void {
     console.log('writeValue', obj);
@@ -43,5 +53,12 @@ export class MyInputComponent implements ControlValueAccessor {
 
   setValue() {
     this.onChange('this.value');
+  }
+
+  myInput(event: Event) {
+    const target = event.target as HTMLInputElement;
+    console.log('myInput', target.value);
+    this.onChange(target.value);
+    // this.ngControl.control?.setValue(value);
   }
 }
