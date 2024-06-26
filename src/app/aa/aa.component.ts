@@ -20,6 +20,8 @@ import {
   ValidationErrors,
   Validators
 } from "@angular/forms";
+import {UsernameValidatorDirective} from "../username-validator.directive";
+import {UsernameInputComponent} from "../username-input/username-input.component";
 
 @Component({
   selector: 'app-aa',
@@ -31,7 +33,9 @@ import {
     MyInputComponent,
     ReactiveFormsModule,
     FormsModule,
-    JsonPipe
+    JsonPipe,
+    UsernameValidatorDirective,
+    UsernameInputComponent
   ],
   templateUrl: './aa.component.html',
   styleUrl: './aa.component.css'
@@ -50,7 +54,8 @@ export class AaComponent implements AfterViewInit, OnInit {
 
   form = this.fb.group({
     name: this.fb.control(''),
-    age: this.fb.control('', Validators.required),
+    age: this.fb.control(''),
+    username: this.fb.control(''),
   }, {validators: allRequiredValidator});
   validParam1 = '123';
 

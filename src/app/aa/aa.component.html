@@ -23,7 +23,12 @@
 
 <button (click)="setName()">setName</button>{{ form.controls.name.getRawValue() }}
 <!--<input type="text" [formControl]="form.controls.name">-->
-<label for="idAge">年紀</label><input id="idAge" type="text" [formControl]="form.controls.age">{{ form.controls.age.errors | json }}
+<label>
+  年紀
+  <input type="text" appUsernameValidator [formControl]="form.controls.age">
+</label>{{ form.controls.age.errors | json }}
 <button (click)="setParam()">setParam</button>
 <app-my-input [formControl]="form.controls.name" [validParam]="validParam1"></app-my-input>
 {{ form.errors | json }}{{ form.controls.name.errors | json }}
+<app-username-input [formControl]="form.controls.username"></app-username-input>
+{{ form.controls.username.errors | json }}
