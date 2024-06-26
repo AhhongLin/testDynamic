@@ -8,11 +8,18 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import {NgIf} from "@angular/common";
+import {JsonPipe, NgIf} from "@angular/common";
 import {Dir1Directive} from "../dir1.directive";
 import {MyNgIfDirective} from "../my-ng-if.directive";
 import {MyInputComponent} from "../my-input/my-input.component";
-import {FormBuilder, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {
+  AbstractControl,
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validators
+} from "@angular/forms";
 
 @Component({
   selector: 'app-aa',
@@ -23,7 +30,8 @@ import {FormBuilder, FormsModule, ReactiveFormsModule} from "@angular/forms";
     MyNgIfDirective,
     MyInputComponent,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    JsonPipe
   ],
   templateUrl: './aa.component.html',
   styleUrl: './aa.component.css'
@@ -39,9 +47,12 @@ export class AaComponent implements AfterViewInit, OnInit {
   isShow = true;
 
   fb = inject(FormBuilder);
+
   form = this.fb.group({
-    name: this.fb.control('')
-  });
+    name: this.fb.control(''),
+    age: this.fb.control('', Validators.required),
+  }, {validators: allRequiredValidator});
+  validParam1 = '123';
 
 
   toggleShow() {
@@ -84,4 +95,19 @@ export class AaComponent implements AfterViewInit, OnInit {
   setName() {
     this.form.controls.name.setValue('test666');
   }
+
+  setParam() {
+    this.validParam1 = this.form.controls.age.value || '123';
+  }
+}
+
+export function allRequiredValidator(c: AbstractControl): ValidationErrors | null {
+  console.log('allRequiredValidator', c);
+  const keys = Object.keys(c.value);
+  for (const key of keys) {
+    if (c.value[key]) {
+      return null;
+    }
+  }
+  return {allRequired: true};
 }

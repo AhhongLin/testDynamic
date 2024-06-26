@@ -22,5 +22,8 @@
 <div *ngIf="isShow then dynamicTemplate else dynamicTemplateElse">myNgIf</div>
 
 <button (click)="setName()">setName</button>{{ form.controls.name.getRawValue() }}
-<input type="text" [formControl]="form.controls.name">
-<app-my-input [formControl]="form.controls.name"></app-my-input>
+<!--<input type="text" [formControl]="form.controls.name">-->
+<label for="idAge">年紀</label><input id="idAge" type="text" [formControl]="form.controls.age">{{ form.controls.age.errors | json }}
+<button (click)="setParam()">setParam</button>
+<app-my-input [formControl]="form.controls.name" [validParam]="validParam1"></app-my-input>
+{{ form.errors | json }}{{ form.controls.name.errors | json }}
